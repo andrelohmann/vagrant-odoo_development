@@ -52,6 +52,7 @@
     vars:
       packages:
       - git
+      - python3-pip
       - python3-dev
       - libxml2-dev
       - libxslt1-dev
@@ -81,10 +82,9 @@
 
   - name: install required npm packages
     npm:
-      name: "{{ required_npm_packages }}"
+      name: "{{ item }}"
       global: yes
-    vars:
-      required_npm_packages:
-      - rtlcss
+    with_items:
+    - rtlcss
 
 ...
