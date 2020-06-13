@@ -37,54 +37,8 @@
   - andrelohmann.wkhtmltopdf
   - andrelohmann.postgresql
   - andrelohmann.nodesource
+  - odoo_dependencies
+  - odoo_installer
 
-  tasks:
-
-  - name: install dependency packages
-    apt:
-      name: "{{ packages }}"
-      state: latest
-      dpkg_options: 'force-confnew,force-confdef'
-      autoclean: yes
-      autoremove: yes
-      update_cache: yes
-      cache_valid_time: 3600
-    vars:
-      packages:
-      - git
-      - python3-pip
-      - python3-dev
-      - libxml2-dev
-      - libxslt1-dev
-      - libldap2-dev
-      - libsasl2-dev
-
-  - name: install required python packages
-    pip:
-      name: "{{ required_python_packages }}"
-      extra_args: --upgrade
-      executable: pip3
-    vars:
-      required_python_packages:
-      - setuptools
-      - wheel
-
-
-  - name: install required python packages
-    pip:
-      name: "{{ required_python_packages }}"
-      extra_args: --upgrade
-      executable: pip3
-    vars:
-      required_python_packages:
-      - setuptools
-      - wheel
-
-  - name: install required npm packages
-    npm:
-      name: "{{ item }}"
-      global: yes
-    with_items:
-    - rtlcss
 
 ...
