@@ -1,0 +1,40 @@
+---
+
+- hosts: all
+  become: true
+  become_method: sudo
+
+  vars:
+    wkhtmltopdf_install_google_fonts: False
+    postgresql_listen: "0.0.0.0"
+    postgresql_databases:
+    - name: odoo
+      encoding: UTF-8
+      state: present
+      schemas:
+      - name: odoo
+        state: present
+    postgresql_users:
+    - name: odoo
+      password: odoo_secret
+      state: present
+      privileges:
+      - database: odoo
+        privs: "All"
+        state: present
+      hosts:
+      - cidr: 0.0.0.0/0
+        database: odoo
+        state: present
+
+  #pre_tasks:
+  #- name: Include custom_vars.yml
+  #  include_vars:
+  #    file: custom_vars.yml
+
+  roles:
+  - andrelohmann.root_colored_prompt
+  - andrelohmann.wkhtmltopdf
+  - andrelohmann.postgresql
+
+...
