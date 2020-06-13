@@ -36,5 +36,6 @@
   - andrelohmann.root_colored_prompt
   - andrelohmann.wkhtmltopdf
   - andrelohmann.postgresql
+  - andrelohmann.nodesource
 
 ...
