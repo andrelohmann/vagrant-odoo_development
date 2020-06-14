@@ -28,6 +28,7 @@
     required_python_packages:
     - setuptools
     - wheel
+    - psycopg2-binary
 
 
 - name: install required python packages

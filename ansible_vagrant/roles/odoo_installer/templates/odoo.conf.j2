@@ -1,0 +1,33 @@
+# need to set the config
+# https://www.odoo.com/documentation/13.0/reference/cmdline.html#configuration-file
+# https://linuxize.com/post/how-to-deploy-odoo-11-on-ubuntu-18-04/
+
+[options]
+; This is the password that allows database operations:
+admin_passwd = {{ odoo_admin_password }}
+
+; Database
+db_host = localhost
+db_port = 5432
+db_name = odoo
+db_user = odoo
+db_password = odoo_secret
+
+; additions
+addons_path = /opt/odoo/addons,/opt/custom-odoo-addons
+; If you are using custom modules
+; addons_path = /opt/odoo/addons,/opt/custom-odoo-addons
+
+; Proxying
+http_interface = 127.0.0.1
+proxy_mode = True
+; Make odoo listen on localhost for proxy
+
+; SMTP
+email_from = mail@{{ odoo_domain }}
+smtp_server = localhost
+smtp_port = {{ mailhog_smtp_port }}
+
+; Logging
+log_level = debug
+logfile = /var/log/odoo.log

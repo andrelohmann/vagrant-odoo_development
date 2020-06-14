@@ -5,6 +5,7 @@
   become_method: sudo
 
   vars:
+    mailhog_smtp_port: 25
     wkhtmltopdf_install_google_fonts: False
     postgresql_listen: "0.0.0.0"
     postgresql_databases:
@@ -27,16 +28,18 @@
         database: odoo
         state: present
 
-  #pre_tasks:
-  #- name: Include custom_vars.yml
-  #  include_vars:
-  #    file: custom_vars.yml
+  pre_tasks:
+  - name: Include custom_vars.yml
+    include_vars:
+      file: custom_vars.yml
 
   roles:
   - andrelohmann.root_colored_prompt
+  - andrelohmann.mailhog
   - andrelohmann.wkhtmltopdf
   - andrelohmann.postgresql
   - andrelohmann.nodesource
+  - proxy
   - odoo_dependencies
   - odoo_installer
 

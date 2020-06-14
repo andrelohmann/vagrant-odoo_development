@@ -1,5 +1,6 @@
 ---
 - andrelohmann.root_colored_prompt
+- andrelohmann.mailhog
 - andrelohmann.wkhtmltopdf
 - andrelohmann.postgresql
 - andrelohmann.nodesource

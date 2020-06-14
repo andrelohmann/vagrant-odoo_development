@@ -38,12 +38,11 @@ Vagrant.configure("2") do |config|
   # vagrant-hostmanager is necessary to update /etc/hosts on hosts and guests
   config.vm.network "private_network", ip: vagrant_config['ip']
   config.vm.hostname = vagrant_config['domain']
-  # config.hostmanager.aliases = %w(www.yourdomain.lokal)
-  #config.vm.network "forwarded_port", guest: 3000, host: 3000
-  #config.vm.network "forwarded_port", guest: 80, host: 80
+  config.hostmanager.aliases = vagrant_config['aliases']
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder "ansible_vagrant", "/vagrant/ansible_vagrant", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=775"]
+  config.vm.synced_folder "odoo-addons", "/ops/custom-odoo-addons", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=777,fmode=777"]
 
   # auto update guest additions
   config.vbguest.auto_update = true

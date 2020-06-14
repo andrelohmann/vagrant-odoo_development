@@ -1,0 +1,54 @@
+---
+
+- name: install dependency packages
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    dpkg_options: 'force-confnew,force-confdef'
+    autoclean: yes
+    autoremove: yes
+    update_cache: yes
+    cache_valid_time: 3600
+  vars:
+    packages:
+    - nginx
+    - gzip
+
+- name: add mailhog proxy config
+  template:
+    src: mailhog.conf.j2
+    dest: /etc/nginx/sites-available/mailhog.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create a symbolic link for mailhog.conf
+  file:
+    src: /etc/nginx/sites-available/mailhog.conf
+    dest: /etc/nginx/sites-enabled/mailhog.conf
+    owner: root
+    group: root
+    state: link
+
+- name: add odoo proxy config
+  template:
+    src: odoo.conf.j2
+    dest: /etc/nginx/sites-available/odoo.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create a symbolic link for odoo.conf
+  file:
+    src: /etc/nginx/sites-available/odoo.conf
+    dest: /etc/nginx/sites-enabled/odoo.conf
+    owner: root
+    group: root
+    state: link
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+
+...

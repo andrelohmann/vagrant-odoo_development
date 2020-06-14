@@ -1,5 +1,70 @@
 ---
 
-# put the odoo install steps here
+- name: create group odoo
+  group:
+    name: odoo
+    state: present
+
+- name: create user odoo
+  user:
+    name: odoo
+    group: odoo
+    shell: /bin/bash
+    state: present
+
+- name: create odoo config folder
+  file:
+    path: /etc/odoo
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
+- name: add systemd unit file
+  template:
+    src: odoo.conf.j2
+    dest: /etc/odoo/odoo.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: clone odoo
+  git:
+    repo: https://github.com/odoo/odoo.git
+    dest: /opt/odoo
+
+- name: set permissions for /opt/odoo
+  file:
+    dest: /opt/odoo
+    owner: odoo
+    group: odoo
+    recurse: yes
+
+- name: install pip3 requirements
+  pip:
+    requirements: /opt/odoo/requirements.txt
+    executable: pip3
+
+- name: add systemd unit file
+  copy:
+    src: odoo.service
+    dest: /etc/systemd/system/odoo.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: systemctl enable odoo
+  systemd:
+    name: odoo
+    enabled: yes
+
+- name: systemctl start odoo
+  systemd:
+    state: started
+    name: odoo
 
 ...

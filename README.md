@@ -48,3 +48,18 @@ this pluin should get installed automatically on a "vagrant up", if that fails a
 ```
 vagrant up
 ```
+
+### Browse
+
+If you havn't changed the test domains in config.yml and custom_vars.yml, you can open odoo and mailhog the following way:
+
+  * http://odoo.lokal
+  * http://mail.lokal
+
+### Module Development
+
+The **demo_module** in folder **odoo-addons** was scaffolded the following way:
+
+```
+python3 /opt/odoo/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
+```
