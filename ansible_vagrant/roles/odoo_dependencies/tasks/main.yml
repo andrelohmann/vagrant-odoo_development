@@ -18,6 +18,8 @@
     - libxslt1-dev
     - libldap2-dev
     - libsasl2-dev
+    - python3-wheel
+    - python3-psycopg2
 
 - name: install required python packages
   pip:
@@ -27,19 +29,7 @@
   vars:
     required_python_packages:
     - setuptools
-    - wheel
     - psycopg2-binary
-
-
-- name: install required python packages
-  pip:
-    name: "{{ required_python_packages }}"
-    extra_args: --upgrade
-    executable: pip3
-  vars:
-    required_python_packages:
-    - setuptools
-    - wheel
 
 - name: install required npm packages
   npm:

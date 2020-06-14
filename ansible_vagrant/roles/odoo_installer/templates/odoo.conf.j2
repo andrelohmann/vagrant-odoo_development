@@ -1,6 +1,7 @@
 # need to set the config
 # https://www.odoo.com/documentation/13.0/reference/cmdline.html#configuration-file
 # https://linuxize.com/post/how-to-deploy-odoo-11-on-ubuntu-18-04/
+# https://gist.github.com/Guidoom/d5db0a76ce669b139271a528a8a2a27f
 
 [options]
 ; This is the password that allows database operations:
@@ -14,9 +15,9 @@ db_user = odoo
 db_password = odoo_secret
 
 ; additions
-addons_path = /opt/odoo/addons,/opt/custom-odoo-addons
+addons_path = /opt/odoo/odoo13/addons,/opt/custom-odoo-addons
 ; If you are using custom modules
-; addons_path = /opt/odoo/addons,/opt/custom-odoo-addons
+; addons_path = /opt/odoo/odoo13/addons,/opt/custom-odoo-addons
 
 ; Proxying
 http_interface = 127.0.0.1
@@ -31,3 +32,9 @@ smtp_port = {{ mailhog_smtp_port }}
 ; Logging
 log_level = debug
 logfile = /var/log/odoo.log
+
+#-----------------------------------------------------------------------------
+# disable loading demo data for modules to be installed (comma-separated, use
+# "all" for all modules). Default is none
+#-----------------------------------------------------------------------------
+#without_demo =

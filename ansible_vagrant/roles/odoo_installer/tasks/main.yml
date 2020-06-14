@@ -11,19 +11,21 @@
     group: odoo
     shell: /bin/bash
     state: present
+    system: yes
+    home: /opt/odoo
 
-- name: create odoo config folder
-  file:
-    path: /etc/odoo
-    state: directory
+- name: add systemd unit file
+  template:
+    src: odoo.conf.j2
+    dest: /etc/odoo13.conf
     owner: root
     group: root
     mode: 0644
 
 - name: add systemd unit file
-  template:
-    src: odoo.conf.j2
-    dest: /etc/odoo/odoo.conf
+  copy:
+    src: odoo.conf.template
+    dest: /etc/odoo13.conf.template
     owner: root
     group: root
     mode: 0644
@@ -31,18 +33,15 @@
 - name: clone odoo
   git:
     repo: https://github.com/odoo/odoo.git
-    dest: /opt/odoo
-
-- name: set permissions for /opt/odoo
-  file:
-    dest: /opt/odoo
-    owner: odoo
-    group: odoo
-    recurse: yes
+    dest: /opt/odoo/odoo13
+    depth: 1
+    version: "13.0"
+  become: yes
+  become_user: odoo
 
 - name: install pip3 requirements
   pip:
-    requirements: /opt/odoo/requirements.txt
+    requirements: /opt/odoo/odoo13/requirements.txt
     executable: pip3
 
 - name: add systemd unit file

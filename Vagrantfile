@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder "ansible_vagrant", "/vagrant/ansible_vagrant", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=775"]
-  config.vm.synced_folder "odoo-addons", "/ops/custom-odoo-addons", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=777,fmode=777"]
+  config.vm.synced_folder "custom-odoo-addons", "/opt/custom-odoo-addons", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=777,fmode=777"]
 
   # auto update guest additions
   config.vbguest.auto_update = true

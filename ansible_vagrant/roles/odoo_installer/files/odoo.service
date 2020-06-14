@@ -9,7 +9,7 @@ SyslogIdentifier=odoo
 PermissionsStartOnly=true
 User=odoo
 Group=odoo
-ExecStart=/usr/bin/python3 /opt/odoo/odoo-bin -c /etc/odoo/odoo.conf
+ExecStart=/usr/bin/python3 /opt/odoo/odoo13/odoo-bin -c /etc/odoo13.conf
 StandardOutput=journal+console
 
 [Install]
