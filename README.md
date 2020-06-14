@@ -15,9 +15,9 @@ The install process is therefor following the install description found [here](h
 
 ### VirtualBox
 
-  * install the latest virtualbox from oracle repositories (https://www.virtualbox.org/wiki/Downloads)
-  * if you are on a linux distro, follow the instructions to add the oracle repo
-  * install the latest Oracle VM VirtualBox Extension Pack
+  * Install the latest virtualbox from oracle repositories (https://www.virtualbox.org/wiki/Downloads)
+  * If you are on a linux distro, follow the instructions to add the oracle repo
+  * Install the latest Oracle VM VirtualBox Extension Pack
 
 ### Vagrant
 
@@ -27,27 +27,29 @@ The install process is therefor following the install description found [here](h
 
 #### plugins
 
-the vagrant machines depends on the following vagrant plugin.
+The vagrant machines depends on the following vagrant plugins.
 
 ```
 vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-hostmanager
 ```
 
-this pluin should get installed automatically on a "vagrant up", if that fails anyways, please manually install the plugin by entering the command
+These plugins should get installed automatically on a "vagrant up", if that fails anyways, please manually install the plugins by entering the commands.
 
 ## usage
 
 ### upstart
 
-  * clone the repo and change to the directory
-  * copy config.yml.example to config.yml and set your custom configurations
-  * copy ansible_vagrant/custom_vars.yml.example to ansible_vagrant/custom_vars.yml and set your custom vars
-  * run the machine
+  * Clone the repo and change to the directory
+  * Copy config.yml.example to config.yml and set your custom configurations
+  * Copy ansible_vagrant/custom_vars.yml.example to ansible_vagrant/custom_vars.yml and set your custom vars
+  * Run the machine
 
 ```
 vagrant up
 ```
+
+Vagrant installs odoo 13.0 fro source and initializes the database with a set of demo data.
 
 ### Browse
 
@@ -55,6 +57,11 @@ If you havn't changed the test domains in config.yml and custom_vars.yml, you ca
 
   * http://odoo.lokal
   * http://mail.lokal
+
+#### Default credentials
+
+  * Email: admin
+  * Password: admin
 
 ### Config
 

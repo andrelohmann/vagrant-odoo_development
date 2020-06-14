@@ -52,6 +52,15 @@
     group: root
     mode: 0644
 
+# https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781785884887/1/ch01lvl1sec9/initializing-a-new-odoo-database
+# https://www.odoo.com/documentation/13.0/reference/cmdline.html#database
+- name: initialize database
+  shell: /usr/bin/python3 /opt/odoo/odoo13/odoo-bin --database odoo --db_user odoo --db_password odoo_secret --db_host localhost --db_port 5432 --init base --stop-after-init
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: odoo
+
 - name: systemctl daemon-reload
   systemd:
     daemon_reload: yes

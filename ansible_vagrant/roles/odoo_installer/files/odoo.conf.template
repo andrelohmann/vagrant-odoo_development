@@ -1,5 +1,6 @@
 # template created by runnig command "python3 /opt/odoo/odoo13/odoo-bin --save"
 # https://www.youtube.com/watch?v=BOX4saaIZ7g
+# https://www.odoowikia.com/blog/general-5/post/understanding-odoo-configuration-file-6
 
 [options]
 addons_path = /opt/odoo/odoo13/odoo/addons,/opt/odoo/odoo13/addons
