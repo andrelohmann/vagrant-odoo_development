@@ -29,6 +29,7 @@
   vars:
     required_python_packages:
     - setuptools
+    - gevent
     - psycopg2-binary
 
 - name: install required npm packages

@@ -1,11 +1,11 @@
 # https://linuxize.com/post/configure-odoo-with-nginx-as-a-reverse-proxy/
 
 upstream odoo {
- server 127.0.0.1:8069;
+  server 127.0.0.1:8069;
 }
 
 upstream odoo-chat {
- server 127.0.0.1:8072;
+  server 127.0.0.1:8072;
 }
 
 server {
@@ -13,31 +13,32 @@ server {
   listen 80;
   listen [::]:80;
 
-   access_log /var/log/nginx/odoo.access.log;
-   error_log /var/log/nginx/odoo.error.log;
+  access_log /var/log/nginx/odoo.access.log;
+  error_log /var/log/nginx/odoo.error.log;
 
-   proxy_read_timeout 720s;
-   proxy_connect_timeout 720s;
-   proxy_send_timeout 720s;
-   proxy_set_header X-Forwarded-Host $host;
-   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-   proxy_set_header X-Forwarded-Proto $scheme;
-   proxy_set_header X-Real-IP $remote_addr;
+  proxy_read_timeout 720s;
+  proxy_connect_timeout 720s;
+  proxy_send_timeout 720s;
+  proxy_set_header X-Forwarded-Host $host;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_set_header X-Real-IP $remote_addr;
+  client_max_body_size 1024M;
 
-   location / {
-     proxy_redirect off;
-     proxy_pass http://odoo;
-   }
+  location / {
+    proxy_redirect off;
+    proxy_pass http://odoo;
+  }
 
-   location /longpolling {
-       proxy_pass http://odoo-chat;
-   }
+  location /longpolling {
+    proxy_pass http://odoo-chat;
+  }
 
-   location ~* /web/static/ {
-       proxy_cache_valid 200 90m;
-       proxy_buffering    on;
-       expires 864000;
-       proxy_pass http://odoo;
+  location ~* /web/static/ {
+    proxy_cache_valid 200 90m;
+    proxy_buffering    on;
+    expires 864000;
+    proxy_pass http://odoo;
   }
 
   # gzip
