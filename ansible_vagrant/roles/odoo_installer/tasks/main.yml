@@ -39,6 +39,19 @@
   become: yes
   become_user: odoo
 
+# max_upload_size is sadly a fixed value in addons/web/static/src/js/fields/basic_fields.js
+# replace "        this.max_upload_size = 25 * 1024 * 1024; // 25Mo"
+# with "        this.max_upload_size = 1024 * 1024 * 1024; // 1024Mo"
+- name: replace max_upload_size
+  lineinfile:
+    path: "/opt/odoo/odoo13/addons/web/static/src/js/fields/basic_fields.js"
+    regexp: "^        this.max_upload_size = 25 * 1024 * 1024; // 25Mo"
+    line: "        this.max_upload_size = 1024 * 1024 * 1024; // 1024Mo"
+# maybe override functionality is a better way around it
+# https://stackoverflow.com/questions/58395492/override-javascript-function-in-odoo#:~:text=This%20means%20you%20cannot%20override,odoo.
+# https://www.odoo.com/fr_FR/forum/aide-1/question/odoo-10-how-to-override-javascript-function-137833
+# https://supportuae.wordpress.com/2017/08/06/how-to-override-form-widgets-odoo-javascript/
+
 - name: install pip3 requirements
   pip:
     requirements: /opt/odoo/odoo13/requirements.txt
