@@ -20,6 +20,23 @@
     - libsasl2-dev
     - python3-wheel
     - python3-psycopg2
+    - build-essential
+    - wget
+    - libfreetype6-dev
+    - libzip-dev
+    - python3-setuptools
+    - node-less
+    - libjpeg-dev
+    - zlib1g-dev
+    - libpq-dev
+    - libtiff5-dev
+    - libjpeg8-dev
+    - libopenjp2-7-dev
+    - liblcms2-dev
+    - libwebp-dev
+    - libharfbuzz-dev
+    - libfribidi-dev
+    - libxcb1-dev
 
 - name: install required python packages
   pip:

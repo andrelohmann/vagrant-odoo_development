@@ -17,7 +17,7 @@
 - name: add systemd unit file
   template:
     src: odoo.conf.j2
-    dest: /etc/odoo13.conf
+    dest: /etc/odoo15.conf
     owner: root
     group: root
     mode: 0644
@@ -25,7 +25,7 @@
 - name: add systemd unit file
   copy:
     src: odoo.conf.template
-    dest: /etc/odoo13.conf.template
+    dest: /etc/odoo15.conf.template
     owner: root
     group: root
     mode: 0644
@@ -33,20 +33,21 @@
 - name: clone odoo
   git:
     repo: https://github.com/odoo/odoo.git
-    dest: /opt/odoo/odoo13
+    dest: /opt/odoo/odoo15
     depth: 1
-    version: "13.0"
+    version: "15.0"
   become: yes
   become_user: odoo
 
+## SEEMS TO HAVE CHANGED IN ODOO15
 # max_upload_size is sadly a fixed value in addons/web/static/src/js/fields/basic_fields.js
 # replace "        this.max_upload_size = 25 * 1024 * 1024; // 25Mo"
 # with "        this.max_upload_size = 1024 * 1024 * 1024; // 1024Mo"
-- name: replace max_upload_size
-  lineinfile:
-    path: "/opt/odoo/odoo13/addons/web/static/src/js/fields/basic_fields.js"
-    regexp: "^        this.max_upload_size = 25 * 1024 * 1024; // 25Mo"
-    line: "        this.max_upload_size = 1024 * 1024 * 1024; // 1024Mo"
+#- name: replace max_upload_size
+#  lineinfile:
+#    path: "/opt/odoo/odoo15/addons/web/static/src/legacy/js/fields/basic_fields.js"
+#    regexp: "^        this.max_upload_size = 25 * 1024 * 1024; // 25Mo"
+#    line: "        this.max_upload_size = 1024 * 1024 * 1024; // 1024Mo"
 # maybe override functionality is a better way around it
 # https://stackoverflow.com/questions/58395492/override-javascript-function-in-odoo#:~:text=This%20means%20you%20cannot%20override,odoo.
 # https://www.odoo.com/fr_FR/forum/aide-1/question/odoo-10-how-to-override-javascript-function-137833
@@ -54,7 +55,7 @@
 
 - name: install pip3 requirements
   pip:
-    requirements: /opt/odoo/odoo13/requirements.txt
+    requirements: /opt/odoo/odoo15/requirements.txt
     executable: pip3
 
 - name: add systemd unit file
@@ -68,7 +69,7 @@
 # https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781785884887/1/ch01lvl1sec9/initializing-a-new-odoo-database
 # https://www.odoo.com/documentation/13.0/reference/cmdline.html#database
 - name: initialize database
-  shell: /usr/bin/python3 /opt/odoo/odoo13/odoo-bin --database odoo --db_user odoo --db_password odoo_secret --db_host localhost --db_port 5432 --init base --stop-after-init
+  shell: /usr/bin/python3 /opt/odoo/odoo15/odoo-bin --database odoo --db_user odoo --db_password odoo_secret --db_host localhost --db_port 5432 --init base --stop-after-init
   args:
     executable: /bin/bash
   become: yes

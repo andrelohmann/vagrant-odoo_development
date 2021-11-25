@@ -1,12 +1,12 @@
-# template created by runnig command "python3 /opt/odoo/odoo13/odoo-bin --save"
+# template created by runnig command "python3 /opt/odoo/odoo15/odoo-bin --save"
 # https://www.youtube.com/watch?v=BOX4saaIZ7g
 # https://www.odoowikia.com/blog/general-5/post/understanding-odoo-configuration-file-6
 
 [options]
-addons_path = /opt/odoo/odoo13/odoo/addons,/opt/odoo/odoo13/addons
+addons_path = /opt/odoo/odoo15/odoo/addons,/opt/odoo/odoo15/addons
 admin_passwd = admin
 csv_internal_sep = ,
-data_dir = /root/.local/share/Odoo
+data_dir = /opt/odoo/.local/share/Odoo
 db_host = False
 db_maxconn = 64
 db_name = False
@@ -18,6 +18,7 @@ db_user = False
 dbfilter =
 demo = {}
 email_from = False
+from_filter = False
 geoip_database = /usr/share/GeoIP/GeoLite2-City.mmdb
 http_enable = True
 http_interface =
@@ -37,7 +38,7 @@ log_level = info
 logfile =
 longpolling_port = 8072
 max_cron_threads = 2
-osv_memory_age_limit = 1.0
+osv_memory_age_limit = False
 osv_memory_count_limit = False
 pg_path =
 pidfile =
@@ -50,11 +51,14 @@ smtp_password = False
 smtp_port = 25
 smtp_server = localhost
 smtp_ssl = False
+smtp_ssl_certificate_filename = False
+smtp_ssl_private_key_filename = False
 smtp_user = False
 syslog = False
 test_enable = False
 test_file =
 test_tags = None
+transient_age_limit = 1.0
 translate_modules = ['all']
 unaccent = False
 upgrade_path =

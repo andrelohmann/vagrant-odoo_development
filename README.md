@@ -1,6 +1,6 @@
 # vagrant-odoo_development
 
-(c) Andre Lohmann (and others) 2020
+(c) Andre Lohmann (and others) 2021
 
 ## Maintainer Contact
  * Andre Lohmann
@@ -9,7 +9,7 @@
 ## content
 
 This vagrant machine will install odoo from sources to enable you quickly for odoo plugin development.
-The install process is therefor following the install description found [here](https://www.odoo.com/documentation/13.0/setup/install.html#id7).
+The install process is therefor following the install description found [here](https://linuxize.com/post/how-to-install-odoo-15-on-ubuntu-20-04/).
 
 ## Prequesites
 
@@ -65,10 +65,10 @@ If you havn't changed the test domains in config.yml and custom_vars.yml, you ca
 
 ### Config
 
-The **odoo13.conf.template** was generated the following way:
+The **odoo15.conf.template** was generated the following way:
 
 ```
-python3 /opt/odoo/odoo13/odoo-bin --save
+python3 /opt/odoo/odoo15/odoo-bin --save
 ```
 
 Depending on the user, running that command, the generated config file can be found in ~/.odoorc
@@ -78,7 +78,7 @@ Depending on the user, running that command, the generated config file can be fo
 The **demo_module** in folder **custom-odoo-addons** was scaffolded the following way:
 
 ```
-python3 /opt/odoo/odoo13/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
+python3 /opt/odoo/odoo15/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
 ```
 
 ## Odoo
@@ -104,7 +104,7 @@ a full-featured [Open Source ERP](https://www.odoo.com) when you install several
 
 ### Getting started with Odoo
 
-  * [Setup instructions](https://www.odoo.com/documentation/13.0/setup/install.html)
+  * [Setup instructions](https://www.odoo.com/documentation/15.0/setup/install.html)
   * [Odoo eLearning](https://www.odoo.com/slides)
   * [Scale-up](https://www.odoo.com/page/scale-up-business-game)
-  * [Developer tutorials](https://www.odoo.com/documentation/13.0/tutorials.html)
+  * [Developer tutorials](https://www.odoo.com/documentation/15.0/tutorials.html)
