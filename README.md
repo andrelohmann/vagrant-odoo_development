@@ -1,11 +1,5 @@
 # vagrant-odoo_development
 
-(c) Andre Lohmann (and others) 2021
-
-## Maintainer Contact
- * Andre Lohmann
-   <lohmann.andre (at) gmail (dot) com>
-
 ## content
 
 This vagrant machine will install odoo from sources to enable you quickly for odoo plugin development.
@@ -41,34 +35,43 @@ These plugins should get installed automatically on a "vagrant up", if that fail
 ### upstart
 
   * Clone the repo and change to the directory
-  * Copy config.yml.example to config.yml and set your custom configurations
-  * Copy ansible_vagrant/custom_vars.yml.example to ansible_vagrant/custom_vars.yml and set your custom vars
   * Run the machine
 
 ```
 vagrant up
 ```
 
-Vagrant installs odoo 13.0 fro source and initializes the database with a set of demo data.
+Vagrant installs odoo 16.0 from source and initializes the database with a set of demo data.
 
 ### Browse
 
-If you havn't changed the test domains in config.yml and custom_vars.yml, you can open odoo and mailhog the following way:
+If you havn't changed the test domains in config.yml and custom_vars.yml, you can open odoo, mailhog and adminer the following way:
 
   * http://odoo.lokal
   * http://mail.lokal
+  * http://adminer.lokal
 
 #### Default credentials
 
   * Email: admin
   * Password: admin
 
+#### Adminer Database Access
+
+  * System: PostgreSQL
+  * Server: localhost
+  * Username: odoo
+  * Password: odoo_secret
+  * Database: odoo
+
 ### Config
 
-The **odoo15.conf.template** was generated the following way:
+The **odoo16.conf.template** was generated the following way:
 
 ```
-python3 /opt/odoo/odoo15/odoo-bin --save
+sudo systemctl stop odoo
+sudo su odoo
+python3 /opt/odoo/odoo16/odoo-bin --save
 ```
 
 Depending on the user, running that command, the generated config file can be found in ~/.odoorc
@@ -78,7 +81,7 @@ Depending on the user, running that command, the generated config file can be fo
 The **demo_module** in folder **custom-odoo-addons** was scaffolded the following way:
 
 ```
-python3 /opt/odoo/odoo15/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
+python3 /opt/odoo/odoo16/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
 ```
 
 ## Odoo
@@ -104,7 +107,22 @@ a full-featured [Open Source ERP](https://www.odoo.com) when you install several
 
 ### Getting started with Odoo
 
-  * [Setup instructions](https://www.odoo.com/documentation/15.0/setup/install.html)
+  * [Setup instructions](https://www.odoo.com/documentation/16.0/setup/install.html)
   * [Odoo eLearning](https://www.odoo.com/slides)
   * [Scale-up](https://www.odoo.com/page/scale-up-business-game)
-  * [Developer tutorials](https://www.odoo.com/documentation/15.0/tutorials.html)
+  * [Developer tutorials](https://www.odoo.com/documentation/16.0/tutorials.html)
+
+## License
+
+MIT
+
+## Author Information
+
+&copy; Andre Lohmann (and others) 2023
+
+https://github.com/andrelohmann
+
+### Maintainer Contact
+
+ * Andre Lohmann
+  <lohmann.andre (at) gmail (dot) com>

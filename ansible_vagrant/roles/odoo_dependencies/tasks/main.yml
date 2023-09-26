@@ -1,7 +1,9 @@
 ---
 
+# Dependencies extracted from here
+# https://www.odoo.com/documentation/16.0/de/administration/install/source.html#dependencies
 - name: install dependency packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: latest
     dpkg_options: 'force-confnew,force-confdef'
@@ -12,48 +14,90 @@
   vars:
     packages:
     - git
-    - python3-pip
-    - python3-dev
-    - libxml2-dev
-    - libxslt1-dev
-    - libldap2-dev
-    - libsasl2-dev
-    - python3-wheel
+    - fonts-dejavu-core
+    - fonts-freefont-ttf
+    - fonts-freefont-otf
+    - fonts-noto-core
+    - fonts-inconsolata
+    - fonts-font-awesome
+    - fonts-roboto-unhinted
+    - gsfonts
+    - libjs-underscore
+    - lsb-base
+    - python3-babel
+    - python3-chardet
+    - python3-dateutil
+    - python3-decorator
+    - python3-docutils
+    - python3-freezegun
+    - python3-pil
+    - python3-jinja2
+    - python3-libsass
+    - python3-lxml
+    - python3-num2words
+    - python3-ofxparse
+    - python3-passlib
+    - python3-polib
+    - python3-psutil
     - python3-psycopg2
-    - build-essential
-    - wget
-    - libfreetype6-dev
-    - libzip-dev
+    - python3-pydot
+    - python3-openssl
+    - python3-pypdf2
+    - python3-qrcode
+    - python3-renderpm
+    - python3-reportlab
+    - python3-requests
     - python3-setuptools
-    - node-less
-    - libjpeg-dev
-    - zlib1g-dev
-    - libpq-dev
-    - libtiff5-dev
-    - libjpeg8-dev
-    - libopenjp2-7-dev
-    - liblcms2-dev
-    - libwebp-dev
-    - libharfbuzz-dev
-    - libfribidi-dev
-    - libxcb1-dev
+    - python3-stdnum
+    - python3-tz
+    - python3-vobject
+    - python3-werkzeug
+    - python3-xlsxwriter
+    - python3-xlrd
+    - python3-zeep
+    ###
+    #- python3-pip
+    #- python3-dev
+    #- libxml2-dev
+    #- libxslt1-dev
+    #- libldap2-dev
+    #- libsasl2-dev
+    #- python3-wheel
+    #- python3-psycopg2
+    #- build-essential
+    #- wget
+    #- libfreetype6-dev
+    #- libzip-dev
+    #- python3-setuptools
+    #- libjpeg-dev
+    #- zlib1g-dev
+    #- libpq-dev
+    #- libtiff5-dev
+    #- libjpeg8-dev
+    #- libopenjp2-7-dev
+    #- liblcms2-dev
+    #- libwebp-dev
+    #- libharfbuzz-dev
+    #- libfribidi-dev
+    #- libxcb1-dev
 
-- name: install required python packages
-  pip:
-    name: "{{ required_python_packages }}"
-    extra_args: --upgrade
-    executable: pip3
-  vars:
-    required_python_packages:
-    - setuptools
-    - gevent
-    - psycopg2-binary
+#- name: install required python packages
+#  ansible.builtin.pip:
+#    name: "{{ required_python_packages }}"
+#    extra_args: --upgrade
+#    executable: pip3
+#  vars:
+#    required_python_packages:
+#    - setuptools
+#    - gevent
+#    - psycopg2-binary
 
 - name: install required npm packages
-  npm:
+  community.general.npm:
     name: "{{ item }}"
     global: yes
   with_items:
   - rtlcss
+  - node-less
 
 ...

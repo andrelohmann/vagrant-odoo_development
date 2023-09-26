@@ -1,7 +1,7 @@
 ---
 
 - name: install dependency packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: latest
     dpkg_options: 'force-confnew,force-confdef'
@@ -15,7 +15,7 @@
     - gzip
 
 - name: add mailhog proxy config
-  template:
+  ansible.builtin.template:
     src: mailhog.conf.j2
     dest: /etc/nginx/sites-available/mailhog.conf
     owner: root
@@ -23,15 +23,32 @@
     mode: 0644
 
 - name: create a symbolic link for mailhog.conf
-  file:
+  ansible.builtin.file:
     src: /etc/nginx/sites-available/mailhog.conf
     dest: /etc/nginx/sites-enabled/mailhog.conf
     owner: root
     group: root
     state: link
 
+
+- name: add adminer proxy config
+  ansible.builtin.template:
+    src: adminer.conf.j2
+    dest: /etc/nginx/sites-available/adminer.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create a symbolic link for adminer.conf
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/adminer.conf
+    dest: /etc/nginx/sites-enabled/adminer.conf
+    owner: root
+    group: root
+    state: link
+
 - name: add odoo proxy config
-  template:
+  ansible.builtin.template:
     src: odoo.conf.j2
     dest: /etc/nginx/sites-available/odoo.conf
     owner: root
@@ -39,7 +56,7 @@
     mode: 0644
 
 - name: create a symbolic link for odoo.conf
-  file:
+  ansible.builtin.file:
     src: /etc/nginx/sites-available/odoo.conf
     dest: /etc/nginx/sites-enabled/odoo.conf
     owner: root
@@ -47,7 +64,7 @@
     state: link
 
 - name: restart nginx
-  systemd:
+  ansible.builtin.systemd:
     name: nginx
     state: restarted
 

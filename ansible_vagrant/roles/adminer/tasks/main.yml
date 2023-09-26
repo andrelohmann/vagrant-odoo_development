@@ -1,0 +1,48 @@
+---
+
+- name: Ensure the default apache port is 8080 in ports.conf
+  ansible.builtin.lineinfile:
+    path: /etc/apache2/ports.conf
+    regexp: '^Listen '
+    insertafter: '^#Listen '
+    line: Listen 8080
+
+- name: Ensure the default apache ssl port is 8443 in ports.conf
+  ansible.builtin.lineinfile:
+    path: /etc/apache2/ports.conf
+    regexp: '^\tListen '
+    line: "\tListen 8443"
+
+- name: install dependency packages
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: latest
+    dpkg_options: 'force-confnew,force-confdef'
+    autoclean: true
+    autoremove: true
+    update_cache: true
+    cache_valid_time: 3600
+  vars:
+    packages:
+    - adminer
+
+- name: Add adminer config
+  ansible.builtin.template:
+    src: adminer.conf.j2
+    dest: /etc/apache2/sites-available/adminer.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Deactivate adminer config
+  ansible.builtin.command: a2disconf adminer.conf
+
+- name: Activate adminer site
+  ansible.builtin.command: a2ensite adminer.conf
+
+- name: Restart apache
+  ansible.builtin.systemd:
+    name: "apache2"
+    state: "restarted"
+
+...

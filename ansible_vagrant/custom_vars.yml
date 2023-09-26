@@ -1,5 +1,6 @@
 # custom vars will be put here
 
 mailhog_domain: mail.lokal
+adminer_domain: adminer.lokal
 odoo_domain: odoo.lokal
-odoo_admin_password: __YOUR_PASSWORD__
+odoo_admin_password: P@ssw0rd!

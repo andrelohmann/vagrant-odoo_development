@@ -1,12 +1,12 @@
 ---
 
 - name: create group odoo
-  group:
+  ansible.builtin.group:
     name: odoo
     state: present
 
 - name: create user odoo
-  user:
+  ansible.builtin.user:
     name: odoo
     group: odoo
     shell: /bin/bash
@@ -15,27 +15,27 @@
     home: /opt/odoo
 
 - name: add systemd unit file
-  template:
+  ansible.builtin.template:
     src: odoo.conf.j2
-    dest: /etc/odoo15.conf
+    dest: /etc/odoo16.conf
     owner: root
     group: root
     mode: 0644
 
 - name: add systemd unit file
-  copy:
+  ansible.builtin.copy:
     src: odoo.conf.template
-    dest: /etc/odoo15.conf.template
+    dest: /etc/odoo16.conf.template
     owner: root
     group: root
     mode: 0644
 
 - name: clone odoo
-  git:
+  ansible.builtin.git:
     repo: https://github.com/odoo/odoo.git
-    dest: /opt/odoo/odoo15
+    dest: /opt/odoo/odoo16
     depth: 1
-    version: "15.0"
+    version: "16.0"
   become: yes
   become_user: odoo
 
@@ -53,13 +53,14 @@
 # https://www.odoo.com/fr_FR/forum/aide-1/question/odoo-10-how-to-override-javascript-function-137833
 # https://supportuae.wordpress.com/2017/08/06/how-to-override-form-widgets-odoo-javascript/
 
-- name: install pip3 requirements
-  pip:
-    requirements: /opt/odoo/odoo15/requirements.txt
-    executable: pip3
+# Seems to be breaking in odoo16 - dependencies are installed in odoo_dependencies role
+#- name: install pip3 requirements
+#  ansible.builtin.pip:
+#    requirements: /opt/odoo/odoo16/requirements.txt
+#    executable: pip3
 
 - name: add systemd unit file
-  copy:
+  ansible.builtin.copy:
     src: odoo.service
     dest: /etc/systemd/system/odoo.service
     owner: root
@@ -69,23 +70,23 @@
 # https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781785884887/1/ch01lvl1sec9/initializing-a-new-odoo-database
 # https://www.odoo.com/documentation/13.0/reference/cmdline.html#database
 - name: initialize database
-  shell: /usr/bin/python3 /opt/odoo/odoo15/odoo-bin --database odoo --db_user odoo --db_password odoo_secret --db_host localhost --db_port 5432 --init base --stop-after-init
+  ansible.builtin.shell: /usr/bin/python3 /opt/odoo/odoo16/odoo-bin --database odoo --db_user odoo --db_password odoo_secret --db_host localhost --db_port 5432 --init base --stop-after-init
   args:
     executable: /bin/bash
   become: yes
   become_user: odoo
 
 - name: systemctl daemon-reload
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: yes
 
 - name: systemctl enable odoo
-  systemd:
+  ansible.builtin.systemd:
     name: odoo
     enabled: yes
 
 - name: systemctl start odoo
-  systemd:
+  ansible.builtin.systemd:
     state: started
     name: odoo
 
