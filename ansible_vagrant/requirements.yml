@@ -1,7 +1,13 @@
 ---
+roles:
 - andrelohmann.root_colored_prompt
+- andrelohmann.apache_php
 - andrelohmann.mailhog
 - andrelohmann.wkhtmltopdf
 - andrelohmann.postgresql
 - andrelohmann.nodesource
+
+collections:
+- community.postgresql
+- community.general
 ...

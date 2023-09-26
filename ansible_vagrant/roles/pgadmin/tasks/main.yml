@@ -1,0 +1,27 @@
+---
+
+- name: APT | Install gpg key
+  ansible.builtin.apt_key:
+    url: https://www.pgadmin.org/static/packages_pgadmin_org.pub
+    state: present
+
+- name: Apt | Add apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/{{ ansible_distribution_release }} pgadmin4 main"
+    state: present
+    filename: pgadmin4
+
+- name: APT | Install pgadmin4
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+    dpkg_options: 'force-confnew,force-confdef'
+    autoclean: true
+    autoremove: true
+    update_cache: true
+    cache_valid_time: 3600
+  vars:
+    packages:
+    - pgadmin4-web
+
+...

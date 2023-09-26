@@ -1,12 +1,12 @@
 # need to set the config
-# https://www.odoo.com/documentation/15.0/reference/cmdline.html#configuration-file
+# https://www.odoo.com/documentation/16.0/reference/cmdline.html#configuration-file
 # https://linuxize.com/post/how-to-deploy-odoo-11-on-ubuntu-18-04/
 
 [options]
 ; addons, comma separated list of pathes from which odoo should load its addons
-; /opt/odoo/odoo15/addons is the default addons path
+; /opt/odoo/odoo16/addons is the default addons path
 ; /opt/custom-odoo-addons includes our custom developed addons
-addons_path = /opt/odoo/odoo15/addons,/opt/custom-odoo-addons
+addons_path = /opt/odoo/odoo16/addons,/opt/custom-odoo-addons
 
 ; The database management screens are protected by the admin_passwd setting.
 ; This setting can only be set using configuration files, and is simply checked
@@ -18,7 +18,7 @@ admin_passwd = {{ odoo_admin_password }}
 data_dir = /opt/odoo/.local/share/Odoo
 
 ; Database
-; https://www.odoo.com/documentation/15.0/reference/cmdline.html#database
+; https://www.odoo.com/documentation/16.0/reference/cmdline.html#database
 db_host = localhost
 db_maxconn = 64
 db_port = 5432
