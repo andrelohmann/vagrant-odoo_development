@@ -26,3 +26,14 @@ Creating a second database requires the odoo user to have the regarding priveled
   * http://odoo.lokal/web/login
   * Manage Databases
   * Create Database
+
+```
+Master Password: P@ssw0rd!
+Database: odoo_WHATEVER
+Email: Your Admin Email
+Password: Your Admin Password
+Phone number
+Language
+Country
+Preseed with dummy data if desired
+```
