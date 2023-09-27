@@ -62,7 +62,7 @@ If you havn't changed the test domains in config.yml and custom_vars.yml, you ca
   * Server: localhost
   * Username: odoo
   * Password: odoo_secret
-  * Database: odoo
+  * Database: (leave empty)
 
 ### Config
 
@@ -83,6 +83,40 @@ The **demo_module** in folder **custom-odoo-addons** was scaffolded the followin
 ```
 python3 /opt/odoo/odoo16/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
 ```
+
+### Customizing
+
+#### Resources
+
+If your host allows to have more resources consumed by the Vagrant machine, you can upgrade the cpu cores and memory in the /config.yaml file.
+
+e.g.
+
+```
+---
+configs:
+  memory: "4096"
+  cpus: "4"
+  ansible_version: "latest"
+  ip: "192.168.56.12"
+  domain: odoo.lokal
+  aliases:
+  - mail.lokal
+  - adminer.lokal
+...
+```
+
+#### Databases
+
+One Odoo Installation allows to have multiple Databases for multiple tenants in place. To support this, the playbook needs to set the following attribute for the posgres odoo user.
+
+```
+role_attr_flags: CREATEDB,NOSUPERUSER
+```
+
+Also you should not preseed your database (default).
+
+Preseeding can be activated in /ansible_vagrant/custom_vars.yml
 
 ## Odoo
 

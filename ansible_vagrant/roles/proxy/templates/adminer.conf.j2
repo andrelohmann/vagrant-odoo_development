@@ -13,7 +13,7 @@ server {
   error_log /var/log/nginx/adminer.error.log;
 
   location / {
-    proxy_set_header X-Forwarded-Prefix "/";
+    #proxy_set_header X-Forwarded-Prefix "/";
     proxy_pass http://adminer/;
   }
 

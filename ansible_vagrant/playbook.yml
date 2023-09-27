@@ -9,27 +9,28 @@
     wkhtmltopdf_install_google_fonts: False
     postgresql_listen: "0.0.0.0"
     postgresql_databases:
-    - name: odoo
+    - name: odoo_preseed
       encoding: UTF-8
       extensions: []
       state: present
       schemas:
-      - name: odoo
+      - name: odoo_preseed
         state: present
     postgresql_users:
     - name: odoo
       password: odoo_secret
       state: present
+      role_attr_flags: CREATEDB,NOSUPERUSER
       privileges:
-      - database: odoo
+      - database: odoo_preseed
         privs: "All"
         state: present
       hosts:
       - cidr: localhost
-        database: odoo
+        database: odoo_preseed
         state: present
       - cidr: 0.0.0.0/0
-        database: odoo
+        database: odoo_preseed
         state: present
     apache_php_version: 8.2
     apache_php_ini_settings:

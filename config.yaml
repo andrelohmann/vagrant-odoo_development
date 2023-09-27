@@ -1,7 +1,7 @@
 ---
 configs:
-  memory: "2048"
-  cpus: "2"
+  memory: "4096"
+  cpus: "4"
   ansible_version: "latest"
   ip: "192.168.56.12"
   domain: odoo.lokal
