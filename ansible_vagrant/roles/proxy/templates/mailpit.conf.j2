@@ -1,11 +1,11 @@
 
 server {
-        server_name {{ mailhog_domain }};
+        server_name {{ mailpit_domain }};
         listen 80;
         listen [::]:80;
 
-         access_log /var/log/nginx/mailhog.access.log;
-         error_log /var/log/nginx/mailhog.error.log;
+         access_log /var/log/nginx/mailpit.access.log;
+         error_log /var/log/nginx/mailpit.error.log;
 
         location / {
                 proxy_pass      http://localhost:8025;

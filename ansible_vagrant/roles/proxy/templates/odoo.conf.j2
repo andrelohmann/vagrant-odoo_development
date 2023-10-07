@@ -9,7 +9,7 @@ upstream odoo-chat {
 }
 
 server {
-  server_name {{ odoo_domain }};
+  server_name {{ odoo_domain }} {{ odoo_additional_domains }};
   listen 80;
   listen [::]:80;
 

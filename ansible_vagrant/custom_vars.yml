@@ -1,7 +1,10 @@
 # custom vars will be put here
 
-mailhog_domain: mail.lokal
-adminer_domain: adminer.lokal
+mailpit_domain: mail.odoo.lokal
+pgadmin_domain: pgadmin.odoo.lokal
+pgadmin_email: admin@pgadmin.odoo.lokal
+pgadmin_password: admin
 odoo_domain: odoo.lokal
+odoo_additional_domains: "www.odoo.lokal shop.odoo.lokal"
 odoo_admin_password: P@ssw0rd!
 odoo_preseed: false
