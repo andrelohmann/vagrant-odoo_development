@@ -6,6 +6,8 @@ configs:
   ip: "192.168.56.12"
   domain: odoo.lokal
   aliases:
-  - mail.lokal
-  - adminer.lokal
+  - www.odoo.lokal
+  - shop.odoo.lokal
+  - mail.odoo.lokal
+  - pgadmin.odoo.lokal
 ...

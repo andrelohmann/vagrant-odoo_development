@@ -1,8 +1,7 @@
 ---
 roles:
 - andrelohmann.root_colored_prompt
-- andrelohmann.apache_php
-- andrelohmann.mailhog
+- andrelohmann.mailpit
 - andrelohmann.wkhtmltopdf
 - andrelohmann.postgresql
 - andrelohmann.nodesource

@@ -14,35 +14,35 @@
     - nginx
     - gzip
 
-- name: add mailhog proxy config
+- name: add mailpit proxy config
   ansible.builtin.template:
-    src: mailhog.conf.j2
-    dest: /etc/nginx/sites-available/mailhog.conf
+    src: mailpit.conf.j2
+    dest: /etc/nginx/sites-available/mailpit.conf
     owner: root
     group: root
     mode: 0644
 
-- name: create a symbolic link for mailhog.conf
+- name: create a symbolic link for mailpit.conf
   ansible.builtin.file:
-    src: /etc/nginx/sites-available/mailhog.conf
-    dest: /etc/nginx/sites-enabled/mailhog.conf
+    src: /etc/nginx/sites-available/mailpit.conf
+    dest: /etc/nginx/sites-enabled/mailpit.conf
     owner: root
     group: root
     state: link
 
 
-- name: add adminer proxy config
+- name: add pgadmin proxy config
   ansible.builtin.template:
-    src: adminer.conf.j2
-    dest: /etc/nginx/sites-available/adminer.conf
+    src: pgadmin.conf.j2
+    dest: /etc/nginx/sites-available/pgadmin.conf
     owner: root
     group: root
     mode: 0644
 
 - name: create a symbolic link for adminer.conf
   ansible.builtin.file:
-    src: /etc/nginx/sites-available/adminer.conf
-    dest: /etc/nginx/sites-enabled/adminer.conf
+    src: /etc/nginx/sites-available/pgadmin.conf
+    dest: /etc/nginx/sites-enabled/pgadmin.conf
     owner: root
     group: root
     state: link

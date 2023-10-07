@@ -1,11 +1,11 @@
 # https://linuxize.com/post/configure-odoo-with-nginx-as-a-reverse-proxy/
 
-upstream adminer {
-  server adminer.lokal:8080;
+upstream pgadmin {
+  server {{ pgadmin_domain }}:8080;
 }
 
 server {
-  server_name {{ adminer_domain }};
+  server_name {{ pgadmin_domain }};
   listen 80;
   listen [::]:80;
 
@@ -14,7 +14,7 @@ server {
 
   location / {
     #proxy_set_header X-Forwarded-Prefix "/";
-    proxy_pass http://adminer/;
+    proxy_pass http://pgadmin/;
   }
 
   #proxy_read_timeout 720s;

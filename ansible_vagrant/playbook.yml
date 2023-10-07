@@ -5,7 +5,6 @@
   become_method: sudo
 
   vars:
-    mailhog_smtp_port: 25
     wkhtmltopdf_install_google_fonts: False
     postgresql_listen: "0.0.0.0"
     postgresql_databases:
@@ -32,30 +31,6 @@
       - cidr: 0.0.0.0/0
         database: odoo_preseed
         state: present
-    apache_php_version: 8.2
-    apache_php_ini_settings:
-    - key: post_max_size
-      value: 512M
-    - key: upload_max_filesize
-      value: 512M
-    - key: max_execution_time
-      value: 600
-    - key: max_input_time
-      value: 600
-    sury_php_packages:
-    - php8.2-gd
-    - php8.2-mysql
-    - php8.2-curl
-    - php8.2-mcrypt
-    - php8.2-tidy
-    - php8.2-zip
-    - php-imagick
-    - php-geoip
-    - geoip-bin
-    apache_php_additional_modules:
-    - name: rewrite
-      state: present
-    apache_php_remove_default_vhost: true
 
   pre_tasks:
   - name: Include custom_vars.yml
@@ -64,17 +39,29 @@
 
   roles:
   - andrelohmann.root_colored_prompt
-  - andrelohmann.sury_php
-  - andrelohmann.apache_php
-  - adminer
-  #- pgadmin
-  - andrelohmann.mailhog
+  - andrelohmann.mailpit
+  - pgadmin
+  - andrelohmann.nodesource
   - andrelohmann.wkhtmltopdf
   - andrelohmann.postgresql
-  - andrelohmann.nodesource
   - odoo_dependencies
   - odoo_installer
   - proxy
+
+  tasks:
+  - name: install useful packages
+    ansible.builtin.apt:
+      name: "{{ packages }}"
+      state: latest
+      dpkg_options: 'force-confnew,force-confdef'
+      autoclean: yes
+      autoremove: yes
+      update_cache: yes
+      cache_valid_time: 3600
+    vars:
+      packages:
+      - net-tools
+      - telnet
 
 
 ...

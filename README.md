@@ -45,24 +45,45 @@ Vagrant installs odoo 16.0 from source and initializes the database with a set o
 
 ### Browse
 
-If you havn't changed the test domains in config.yml and custom_vars.yml, you can open odoo, mailhog and adminer the following way:
+If you havn't changed the test domains in config.yml and custom_vars.yml, you can open odoo, mailpit and pgadmin4 the following way:
 
   * http://odoo.lokal
-  * http://mail.lokal
-  * http://adminer.lokal
+  * http://www.odoo.lokal
+  * http://shop.odoo.lokal
+  * http://mail.odoo.lokal
+  * http://pgadmin.odoo.lokal
 
-#### Default credentials
+#### Default odoo credentials
+
+By default, the preseeding process is deactivted. But if it get's activated, the default credentials are: 
 
   * Email: admin
   * Password: admin
 
-#### Adminer Database Access
+#### pgAdmin4 Database Access
 
-  * System: PostgreSQL
-  * Server: localhost
+##### Login credentials
+
+The default credentials are:
+
+  * Email: admin@pgadmin.odoo.lokal
+  * Password: admin
+
+The credentials can be changed in /ansible_vagrant/custom_vars.yml
+
+##### Database Access
+
+Create new server -> set the name (e.g. odoo)
+
+Tab Connection
+
+  * Host: localhost
+  * Port: 5432
+  * Maintenance Database: postgres
   * Username: odoo
   * Password: odoo_secret
-  * Database: (leave empty)
+
+These credentials shouldn't be changed, as they are hardcoded in multiple places
 
 ### Config
 
@@ -101,8 +122,10 @@ configs:
   ip: "192.168.56.12"
   domain: odoo.lokal
   aliases:
-  - mail.lokal
-  - adminer.lokal
+  - www.odoo.lokal
+  - shop.odoo.lokal
+  - mail.odoo.lokal
+  - pgadmin.odoo.lokal
 ...
 ```
 
@@ -135,9 +158,7 @@ The main Odoo Apps include:
   * [Manufacturing](https://www.odoo.com/page/manufacturing)
   * [...](https://www.odoo.com/#apps)
 
-Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get
-a full-featured [Open Source ERP](https://www.odoo.com) when you install several Apps.
-
+Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get a full-featured [Open Source ERP](https://www.odoo.com) when you install several Apps.
 
 ### Getting started with Odoo
 
