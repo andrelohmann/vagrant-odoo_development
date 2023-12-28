@@ -1,14 +1,20 @@
-# template created by runnig command "python3 /opt/odoo/odoo16/odoo-bin --save"
+# template created by runnig command "python3 /opt/odoo/odoo17/odoo-bin --save"
+# systemctl stop odoo.service
+# su - odoo
+# python3 /opt/odoo/odoo17/odoo-bin --save
+# ctrl + c
+# cat /home/odoo/
 # https://www.youtube.com/watch?v=BOX4saaIZ7g
 # https://www.odoowikia.com/blog/general-5/post/understanding-odoo-configuration-file-6
 
 [options]
-addons_path = /opt/odoo/odoo16/odoo/addons,/opt/odoo/odoo16/addons
+addons_path = /opt/odoo/odoo17/odoo/addons,/opt/odoo/odoo17/addons
 admin_passwd = admin
 csv_internal_sep = ,
 data_dir = /opt/odoo/.local/share/Odoo
 db_host = False
 db_maxconn = 64
+db_maxconn_gevent = False
 db_name = False
 db_password = False
 db_port = False
@@ -19,7 +25,8 @@ dbfilter =
 demo = {}
 email_from = False
 from_filter = False
-geoip_database = /usr/share/GeoIP/GeoLite2-City.mmdb
+geoip_city_db = /usr/share/GeoIP/GeoLite2-City.mmdb
+geoip_country_db = /usr/share/GeoIP/GeoLite2-Country.mmdb
 gevent_port = 8072
 http_enable = True
 http_interface =
@@ -38,7 +45,6 @@ log_handler = :INFO
 log_level = info
 logfile =
 max_cron_threads = 2
-osv_memory_age_limit = False
 osv_memory_count_limit = 0
 pg_path =
 pidfile =

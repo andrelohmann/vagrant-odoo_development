@@ -1,7 +1,7 @@
 ---
 
 # Dependencies extracted from here
-# https://www.odoo.com/documentation/16.0/de/administration/install/source.html#dependencies
+# https://www.odoo.com/documentation/17.0/de/administration/install/source.html#dependencies
 - name: install dependency packages
   ansible.builtin.apt:
     name: "{{ packages }}"
@@ -13,6 +13,7 @@
     cache_valid_time: 3600
   vars:
     packages:
+    - software-properties-common
     - git
     - fonts-dejavu-core
     - fonts-freefont-ttf
@@ -24,12 +25,14 @@
     - gsfonts
     - libjs-underscore
     - lsb-base
+    - geoip-bin
     - python3-babel
     - python3-chardet
     - python3-dateutil
     - python3-decorator
     - python3-docutils
     - python3-freezegun
+    - python3-geoip2
     - python3-gevent
     - python3-pil
     - python3-jinja2
@@ -45,6 +48,7 @@
     - python3-openssl
     - python3-pypdf2
     - python3-qrcode
+    - python3-rjsmin
     - python3-renderpm
     - python3-reportlab
     - python3-requests
@@ -100,5 +104,39 @@
   with_items:
   - rtlcss
   - node-less
+
+- name: Add maxmind
+  when: maxmind_account_id is defined and maxmind_license_key is defined and maxmind_edition_ids is defined
+  block:
+
+  - name: Add maxmind ppa
+    ansible.builtin.apt_repository:
+      repo: ppa:maxmind/ppa
+
+  - name: Install geoip databases
+    ansible.builtin.apt:
+      name: "{{ packages }}"
+      state: latest
+      dpkg_options: 'force-confnew,force-confdef'
+      autoclean: yes
+      autoremove: yes
+      update_cache: yes
+      cache_valid_time: 3600
+    vars:
+      packages:
+      - geoipupdate
+
+  - name: Add GeoIP.conf
+    ansible.builtin.template:
+      src: GeoIP.conf
+      dest: /etc/GeoIP.conf
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Run geoipupdate
+    ansible.builtin.shell: geoipupdate
+    args:
+      executable: /bin/bash
 
 ...

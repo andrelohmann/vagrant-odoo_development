@@ -31,11 +31,24 @@
       - cidr: 0.0.0.0/0
         database: odoo_preseed
         state: present
+    mailpit_domain: mail.odoo.lokal
+    pgadmin_domain: pgadmin.odoo.lokal
+    pgadmin_email: admin@pgadmin.odoo.lokal
+    pgadmin_password: admin
+    odoo_domain: odoo.lokal
+    odoo_additional_domains: "www.odoo.lokal shop.odoo.lokal"
+    odoo_admin_password: P@ssw0rd!
+    odoo_preseed: false
 
   pre_tasks:
-  - name: Include custom_vars.yml
+  - name: check for file custom_vars.yml
+    stat:
+      path: custom_vars.yml
+    register: stat_custom_vars
+  - name: load custom vars, if existent
     include_vars:
       file: custom_vars.yml
+    when: stat_custom_vars.stat.exists
 
   roles:
   - andrelohmann.root_colored_prompt
@@ -62,6 +75,5 @@
       packages:
       - net-tools
       - telnet
-
 
 ...

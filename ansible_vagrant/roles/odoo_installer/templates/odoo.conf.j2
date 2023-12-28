@@ -1,12 +1,12 @@
 # need to set the config
-# https://www.odoo.com/documentation/16.0/reference/cmdline.html#configuration-file
+# https://www.odoo.com/documentation/17.0/reference/cmdline.html#configuration-file
 # https://linuxize.com/post/how-to-deploy-odoo-11-on-ubuntu-18-04/
 
 [options]
 ; addons, comma separated list of pathes from which odoo should load its addons
-; /opt/odoo/odoo16/addons is the default addons path
+; /opt/odoo/odoo17/addons is the default addons path
 ; /opt/custom-odoo-addons includes our custom developed addons
-addons_path = /opt/odoo/odoo16/addons,/opt/custom-odoo-addons
+addons_path = /opt/odoo/odoo17/addons,/opt/custom-odoo-addons
 
 ; The database management screens are protected by the admin_passwd setting.
 ; This setting can only be set using configuration files, and is simply checked
@@ -14,13 +14,16 @@ addons_path = /opt/odoo/odoo16/addons,/opt/custom-odoo-addons
 ; value to ensure third parties can not use this interface.
 admin_passwd = {{ odoo_admin_password }}
 
+csv_internal_sep = ,
+
 ; Data Dir for Sessions etc.
 data_dir = /opt/odoo/.local/share/Odoo
 
 ; Database
-; https://www.odoo.com/documentation/16.0/reference/cmdline.html#database
+; https://www.odoo.com/documentation/17.0/reference/cmdline.html#database
 db_host = localhost
 db_maxconn = 64
+db_maxconn_gevent = False
 db_port = 5432
 {% if odoo_preseed %}
 db_name = odoo_preseed
@@ -30,6 +33,7 @@ db_name = False
 db_user = odoo
 db_password = odoo_secret
 db_template = template0
+db_sslmode = prefer
 list_db = True
 #dbfilter = *
 
@@ -42,7 +46,8 @@ smtp_port = {{ mailpit_smtp_port }}
 ; registration with maxmind and download of the database is required
 ; https://www.odoo.com/documentation/user/1.0/website/publish/on-premise_geo-ip-installation.html
 ; https://dev.maxmind.com/geoip/geoipupdate/
-; geoip_database = /usr/share/GeoIP/GeoLite2-City.mmdb
+; geoip_city_db = /usr/share/GeoIP/GeoLite2-City.mmdb
+; geoip_country_db = /usr/share/GeoIP/GeoLite2-Country.mmdb
 
 ; HTTP
 http_enable = True

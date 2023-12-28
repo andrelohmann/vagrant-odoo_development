@@ -1,0 +1,9 @@
+# If you want to make use of GeoIP Data,
+# fill out the variables and copy this file to custm_vars.yml
+# To create an account with maxmind, follow these links
+# https://dev.maxmind.com/geoip/updating-databases
+# https://www.wpdiaries.com/country-by-ip/
+
+maxmind_account_id: __YOUR_MAXMIND_ACCOUNT_ID__
+maxmind_license_key: __YOUR_MAXMIND_LICENSE_KEY__
+maxmind_edition_ids: __YOUR_MAXMIND_EDITION_IDS__

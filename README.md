@@ -41,7 +41,7 @@ These plugins should get installed automatically on a "vagrant up", if that fail
 vagrant up
 ```
 
-Vagrant installs odoo 16.0 from source and initializes the database with a set of demo data.
+Vagrant installs odoo 17.0 from source and initializes the database with a set of demo data.
 
 ### Browse
 
@@ -55,7 +55,7 @@ If you havn't changed the test domains in config.yml and custom_vars.yml, you ca
 
 #### Default odoo credentials
 
-By default, the preseeding process is deactivted. But if it get's activated, the default credentials are: 
+By default, the preseeding process is deactivted. But if it get's activated, the default credentials are:
 
   * Email: admin
   * Password: admin
@@ -87,12 +87,12 @@ These credentials shouldn't be changed, as they are hardcoded in multiple places
 
 ### Config
 
-The **odoo16.conf.template** was generated the following way:
+The **odoo17.conf.template** was generated the following way:
 
 ```
 sudo systemctl stop odoo
 sudo su odoo
-python3 /opt/odoo/odoo16/odoo-bin --save
+python3 /opt/odoo/odoo17/odoo-bin --save
 ```
 
 Depending on the user, running that command, the generated config file can be found in ~/.odoorc
@@ -102,7 +102,7 @@ Depending on the user, running that command, the generated config file can be fo
 The **demo_module** in folder **custom-odoo-addons** was scaffolded the following way:
 
 ```
-python3 /opt/odoo/odoo16/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
+python3 /opt/odoo/odoo17/odoo-bin scaffold demo_module /opt/custom-odoo-addons/
 ```
 
 ### Customizing
@@ -162,10 +162,10 @@ Odoo Apps can be used as stand-alone applications, but they also integrate seaml
 
 ### Getting started with Odoo
 
-  * [Setup instructions](https://www.odoo.com/documentation/16.0/setup/install.html)
+  * [Setup instructions](https://www.odoo.com/documentation/17.0/administration/install/source.html)
   * [Odoo eLearning](https://www.odoo.com/slides)
   * [Scale-up](https://www.odoo.com/page/scale-up-business-game)
-  * [Developer tutorials](https://www.odoo.com/documentation/16.0/tutorials.html)
+  * [Developer tutorials](https://www.odoo.com/documentation/17.0/developer/tutorials/getting_started.html)
 
 ## License
 
