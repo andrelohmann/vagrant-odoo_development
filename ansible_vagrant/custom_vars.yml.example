@@ -1,3 +1,4 @@
+---
 # If you want to make use of GeoIP Data,
 # fill out the variables and copy this file to custm_vars.yml
 # To create an account with maxmind, follow these links
@@ -7,3 +8,6 @@
 maxmind_account_id: __YOUR_MAXMIND_ACCOUNT_ID__
 maxmind_license_key: __YOUR_MAXMIND_LICENSE_KEY__
 maxmind_edition_ids: __YOUR_MAXMIND_EDITION_IDS__
+maxmind_geoipupdate_run: true
+maxmind_geoipupdate_cron: true
+...

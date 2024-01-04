@@ -5,6 +5,8 @@ roles:
 - andrelohmann.wkhtmltopdf
 - andrelohmann.postgresql
 - andrelohmann.nodesource
+- andrelohmann.maxmind
+- andrelohmann.odoo
 
 collections:
 - community.postgresql

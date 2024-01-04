@@ -68,4 +68,7 @@
     name: nginx
     state: restarted
 
+# building a ssl proof proxy setup
+# https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/
+
 ...
