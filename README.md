@@ -185,6 +185,11 @@ Odoo Apps can be used as stand-alone applications, but they also integrate seaml
 * [Scale-up](https://www.odoo.com/page/scale-up-business-game)
 * [Developer tutorials](https://www.odoo.com/documentation/17.0/developer/tutorials/getting_started.html)
 
+## Todo
+
+* Implement [dbfiler_from_header](https://odoo-community.org/shop/dbfilter-from-header-921)
+* https://trobz.com/blog/odoo-4/post/all-you-need-to-know-about-db-filtering-in-odoo-16#blog_content
+
 ## License
 
 MIT
