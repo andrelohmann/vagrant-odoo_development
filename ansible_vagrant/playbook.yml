@@ -47,7 +47,7 @@
     maxmind_geoipupdate_run: false
     maxmind_geoipupdate_cron: false
     odoo_release: 17
-    odoo_source_install: true
+    odoo_source_install: false
     odoo_config:
     - key: admin_passwd
       value: "P@ssw0rd!"
