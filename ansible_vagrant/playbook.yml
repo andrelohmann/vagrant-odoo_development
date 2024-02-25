@@ -12,6 +12,7 @@
     - name: odoo_preseed
       encoding: UTF-8
       extensions: []
+      owner: odoo
       state: present
       schemas:
       - name: odoo_preseed
@@ -38,15 +39,23 @@
     pgadmin_password: admin
     odoo_domain: odoo.lokal
     odoo_additional_domains: "www.odoo.lokal shop.odoo.lokal dev.odoo.lokal test.odoo.lokal prod.odoo.lokal"
+    odoo_preseed_domain: preseed.odoo.lokal
     odoo_admin_password: P@ssw0rd!
-    odoo_preseed: false
     # Maxmind -> if custom_vars are set, these variables will be overwritten
     maxmind_account_id: __ID__
     maxmind_license_key: __KEY__
     maxmind_edition_ids: __EDITIONS__
     maxmind_geoipupdate_run: false
     maxmind_geoipupdate_cron: false
+    # Add dbfilter_from_header
+    odoo_oca_modules:
+    - dbfilter_from_header
+    # Preseed one database
+    odoo_init_databases:
+    - database: odoo_preseed
+      language: de_DE
     odoo_release: 17
+    #odoo_source_install: true
     odoo_source_install: false
     odoo_config:
     - key: admin_passwd
@@ -59,8 +68,15 @@
       value: "odoo"
     - key: db_password
       value: "odoo_secret"
+    # Odoo 17 from source
+    # - key: addons_path
+    #   value: "/opt/odoo/odoo17/odoo/addons,/opt/odoo/.local/share/Odoo/addons/17.0,/opt/odoo/odoo17/addons,/opt/OCA/server-tools" # ['/opt/odoo/odoo17/odoo/addons', '/opt/odoo/.local/share/Odoo/addons/17.0', '/opt/odoo/odoo17/addons']
+    # Odoo 17 from deb packages
     - key: addons_path
-      value: "/opt/odoo/odoo17/addons,/opt/custom-odoo-addons"
+      value: "/usr/lib/python3/dist-packages/odoo/addons,/var/lib/odoo/.local/share/Odoo/addons/17.0,/opt/OCA/server-tools" # ['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/.local/share/Odoo/addons/17.0']
+    # Add dbfilter_from_header
+    - key: server_wide_modules
+      value: base,dbfilter_from_header
     - key: default_productivity_apps
       value: "False"
     - key: email_from
@@ -94,6 +110,7 @@
   - andrelohmann.wkhtmltopdf
   - andrelohmann.postgresql
   - andrelohmann.maxmind
+  - odoo_oca
   - andrelohmann.odoo
   - proxy
 

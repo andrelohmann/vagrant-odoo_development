@@ -1,10 +1,10 @@
 # https://www.odoo.com/documentation/17.0/administration/install/deploy.html#https
 
-upstream odoo {
+upstream odoops {
   server 127.0.0.1:8069;
 }
 
-upstream odoochat {
+upstream odoochatps {
   server 127.0.0.1:8072;
 }
 
@@ -19,19 +19,21 @@ map $sent_http_content_type $content_type_csp {
 }
 
 server {
-  server_name {{ odoo_domain }} {{ odoo_additional_domains }};
+  server_name {{ odoo_preseed_domain }};
   listen 80;
   listen [::]:80;
 
-  access_log /var/log/nginx/odoo.access.log;
-  error_log /var/log/nginx/odoo.error.log;
+  access_log /var/log/nginx/odoo-preseed.access.log;
+  error_log /var/log/nginx/odoo-preseed.error.log;
 
-  # Allow 1G Uploads
-  client_max_body_size 1024M;
+  client_max_body_size 100M;
 
   proxy_read_timeout 720s;
   proxy_connect_timeout 720s;
   proxy_send_timeout 720s;
+
+  # Set the dbfilter_from_header to odoo_preseed database
+  proxy_set_header X-Odoo-dbfilter ^odoo_preseed\Z;
 
   proxy_set_header X-Forwarded-Host $host;
   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -45,7 +47,7 @@ server {
   location /websocket {
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $connection_upgrade;
-    proxy_pass http://odoochat;
+    proxy_pass http://odoochatps;
   }
 
   location / {
@@ -63,7 +65,7 @@ server {
   location @odoo {
     # copy-paste the content of the / location block
     proxy_redirect off;
-    proxy_pass http://odoo;
+    proxy_pass http://odoops;
   }
 
   # Serve static files right away

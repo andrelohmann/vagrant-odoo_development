@@ -63,6 +63,22 @@
     group: root
     state: link
 
+- name: add preseed odoo proxy config
+  ansible.builtin.template:
+    src: odoo-preseed.conf.j2
+    dest: /etc/nginx/sites-available/odoo-preseed.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create a symbolic link for odoo-preseed.conf
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/odoo-preseed.conf
+    dest: /etc/nginx/sites-enabled/odoo-preseed.conf
+    owner: root
+    group: root
+    state: link
+
 - name: restart nginx
   ansible.builtin.systemd:
     name: nginx

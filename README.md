@@ -2,7 +2,7 @@
 
 ## content
 
-This vagrant machine will install odoo from source to enable you quickly for odoo plugin development. It is based on a few roles, that are solving the dependencies.
+This vagrant machine will install odoo from deb nightly builds to enable you quickly for odoo plugin development. It is based on a few roles, that are solving the dependencies.
 
 ## Prequesites
 
@@ -51,7 +51,7 @@ These plugins should get installed automatically on a "vagrant up", if that fail
 vagrant up
 ```
 
-Vagrant installs odoo 17.0 from source.
+Vagrant installs odoo 17.0 from nightly debian packages.
 
 ### Browse
 
@@ -62,6 +62,19 @@ If you havn't changed the test domains in config.yml and custom_vars.yml, you ca
 * http://shop.odoo.lokal <- Additional Domain for use with e.g. website module
 * http://mail.odoo.lokal <- Catch All Email service
 * http://pgadmin.odoo.lokal <- Database Frontend
+* http://preseed.odoo.lokal <- access preseeded Database
+
+#### Preseed Database
+
+* https://github.com/OCA/server-tools/tree/17.0/dbfilter_from_header
+
+To showcase the database selector by header, the initial database "odoo_preseed" is preseeded with the following command:
+
+```
+sudo -u odoo /usr/bin/python3 /usr/bin/odoo --config /etc/odoo/odoo.conf --database odoo --init base --load-language de_DE --without-demo all --stop-after-init
+```
+
+The login to the preseeded database uses "admin" for username and password. 
 
 #### Default odoo credentials
 

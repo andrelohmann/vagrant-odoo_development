@@ -1,0 +1,33 @@
+---
+
+- name: Create /opt/OCA/server-tools
+  ansible.builtin.file:
+    path: /opt/OCA/server-tools
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: prepare sparse git repository
+  shell: |
+    git config --global init.defaultBranch main
+    git config --global --add safe.directory /opt/OCA/server-tools
+    git init
+    git config core.sparsecheckout true
+    git remote add origin https://github.com/OCA/server-tools
+  args:
+    chdir: "/opt/OCA/server-tools"
+    creates: "/opt/OCA/server-tools/.git"
+
+- name: configure sparse-checkout
+  copy:
+    dest: "/opt/OCA/server-tools/.git/info/sparse-checkout"
+    content: '{{ odoo_oca_modules | join("\n") }}'
+
+- name: clone code
+  shell: git pull origin {{ odoo_release }}.0
+  args:
+    chdir: "/opt/OCA/server-tools"
+    creates: "/opt/OCA/server-tools/{{ odoo_oca_modules | first }}"
+
+...
