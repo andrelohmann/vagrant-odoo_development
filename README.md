@@ -74,7 +74,14 @@ To showcase the database selector by header, the initial database "odoo_preseed"
 sudo -u odoo /usr/bin/python3 /usr/bin/odoo --config /etc/odoo/odoo.conf --database odoo --init base --load-language de_DE --without-demo all --stop-after-init
 ```
 
-The login to the preseeded database uses "admin" for username and password. 
+The login to the preseeded database uses "admin" for username and password.
+
+Add the following line to the nginx vhost file, to set select the database.
+
+```
+# Set the dbfilter_from_header to odoo_preseed database
+proxy_set_header X-Odoo-dbfilter ^odoo_preseed\Z;
+```
 
 #### Default odoo credentials
 
