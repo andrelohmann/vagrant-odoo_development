@@ -8,6 +8,10 @@ configs:
   aliases:
   - www.odoo.lokal
   - shop.odoo.lokal
+  - dev.odoo.lokal
+  - test.odoo.lokal
+  - prod.odoo.lokal
   - mail.odoo.lokal
   - pgadmin.odoo.lokal
+  - preseed.odoo.lokal
 ...
