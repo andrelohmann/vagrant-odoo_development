@@ -39,7 +39,7 @@
     pgadmin_password: admin
     odoo_domain: odoo.lokal
     odoo_additional_domains: "www.odoo.lokal shop.odoo.lokal dev.odoo.lokal test.odoo.lokal prod.odoo.lokal"
-    odoo_preseed_domain: preseed.odoo.lokal
+    odoo_preseed_domains: preseed.odoo.lokal preseed1.odoo.lokal preseed2.odoo.lokal preseed3.odoo.lokal preseed4.odoo.lokal preseed5.odoo.lokal
     odoo_admin_password: P@ssw0rd!
     # Maxmind -> if custom_vars are set, these variables will be overwritten
     maxmind_account_id: __ID__

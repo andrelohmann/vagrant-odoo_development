@@ -14,4 +14,9 @@ configs:
   - mail.odoo.lokal
   - pgadmin.odoo.lokal
   - preseed.odoo.lokal
+  - preseed1.odoo.lokal
+  - preseed2.odoo.lokal
+  - preseed3.odoo.lokal
+  - preseed4.odoo.lokal
+  - preseed5.odoo.lokal
 ...

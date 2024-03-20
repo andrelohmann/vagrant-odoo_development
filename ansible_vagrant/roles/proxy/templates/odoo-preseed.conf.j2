@@ -19,7 +19,7 @@ map $sent_http_content_type $content_type_csp {
 }
 
 server {
-  server_name {{ odoo_preseed_domain }};
+  server_name {{ odoo_preseed_domains }};
   listen 80;
   listen [::]:80;
 
